@@ -8,3 +8,4 @@ pandas==2.2.3
 python-dotenv==1.0.1
 sentence-transformers==2.2.2
 pinecone-client==2.2.3
+huggingface_hub==0.25.2
