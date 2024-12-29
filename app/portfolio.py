@@ -4,10 +4,11 @@ import requests
 from io import StringIO
 from pinecone import Pinecone, ServerlessSpec
 import uuid
+import streamlit as st;
 
 # Dropbox shared link for the portfolio data
 shared_link = "https://www.dropbox.com/scl/fi/68pp185mpnbzple629h5c/my_portfolio.csv?rlkey=5mgk30vpmo0gc4as0njzs8up5&st=3gtuzx2y&dl=1"
-
+# st.write("")
 
 def fetch_csv_from_dropbox_url(url):
         response = requests.get(url)
@@ -19,7 +20,7 @@ def fetch_csv_from_dropbox_url(url):
 class Portfolio:
     def __init__(self):
         self.data = fetch_csv_from_dropbox_url(shared_link)
-        self.pinecone_client = Pinecone(api_key="pcsk_2nQXbL_AmyBNAPz7zz9DwXe3mDr65yFU1rF6EJf9f1vQbZir4SzBLk9DTQBVq5CVDUqRP2")
+        self.pinecone_client = Pinecone(api_key= st.secrets["Pinecone_api_key"]);
         self.index_name = "portfolioindex" 
 
         if self.index_name not in [index["name"] for index in self.pinecone_client.list_indexes().indexes]:
