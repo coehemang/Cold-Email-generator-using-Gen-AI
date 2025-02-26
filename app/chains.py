@@ -5,11 +5,19 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 import streamlit as st;
 
-st.secrets["GROQ_Api_key"]
+
 
 class Chain:
     def __init__(self):
-        self.llm =  ChatGroq(model="llama3-8b-8192",temperature=0,max_tokens=None,timeout=None,max_retries=2,)
+        self.llm = ChatGroq(
+    model="llama3-8b-8192",
+    temperature=0,
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    api_key=st.secrets["GROQ_Api_key"]
+)
+
 
     def extract_jobs(self , page_data):
         Prompt_extract = PromptTemplate.from_template(
